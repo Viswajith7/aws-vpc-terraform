@@ -41,7 +41,6 @@ pipeline {
         // Credentials stored in Jenkins credential store
         AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
-        SLACK_WEBHOOK_URL     = credentials('slack-webhook-url')
     }
 
     options {
@@ -162,21 +161,16 @@ Review plan : ${env.BUILD_URL}artifact/plan-${PLAN_FILE}.txt
         }
     }
 
-    // ── Post-pipeline notifications ────────────────────────
+// ── Post-pipeline notifications ────────────────────────
     post {
         success {
-            sh """curl -s -X POST -H 'Content-type: application/json' \
-                --data '{"text":"✅ VPC Terraform ${params.ENVIRONMENT} succeeded — build #${env.BUILD_NUMBER}"}' \
-                ${SLACK_WEBHOOK_URL}"""
+            echo "✅ Pipeline succeeded for environment: ${params.ENVIRONMENT}"
         }
         failure {
-            sh """curl -s -X POST -H 'Content-type: application/json' \
-                --data '{"text":"❌ VPC Terraform ${params.ENVIRONMENT} FAILED — build #${env.BUILD_NUMBER} ${env.BUILD_URL}"}' \
-                ${SLACK_WEBHOOK_URL}"""
+            echo "❌ Pipeline failed for environment: ${params.ENVIRONMENT}"
         }
         always {
-            // Clean workspace to avoid state bleed between builds
-            cleanWs()
+            echo "Pipeline finished - Build #${env.BUILD_NUMBER}"
         }
     }
 }
