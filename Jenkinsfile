@@ -13,13 +13,9 @@
 // ─────────────────────────────────────────────────────────────
 
 pipeline {
-    agent {
-        // Run inside a Docker container that has terraform + awscli installed
-        docker {
-            image 'hashicorp/terraform:1.6'
-            args  '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+
+    agent any
+
 
     // ── Pipeline-wide parameters ───────────────────────────
     parameters {
@@ -49,7 +45,7 @@ pipeline {
     }
 
     options {
-        ansiColor('xterm')              // colourised terraform output
+                      // colourised terraform output
         timestamps()
         timeout(time: 60, unit: 'MINUTES')
         disableConcurrentBuilds()       // prevent parallel state mutations
