@@ -131,9 +131,7 @@ Review plan : ${env.BUILD_URL}artifact/plan-${PLAN_FILE}.txt
                     """.trim()
 
                     // Post to Slack before the human gate
-                    sh """curl -s -X POST -H 'Content-type: application/json' \
-                        --data '{"text":"${msg}"}' \
-                        ${SLACK_WEBHOOK_URL}"""
+                    echo "Approval needed: ${msg}"
 
                     timeout(time: 30, unit: 'MINUTES') {
                         input(
