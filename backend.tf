@@ -15,11 +15,11 @@ terraform {
 
   backend "s3" {
     # ── Values produced by bootstrap/main.tf ──
-    bucket         = "myapp-prod-tfstate-520235901820"   # <── replace
+    bucket         = "myapp-prod-tfstate-520235901820" # <── replace
     key            = "prod/vpc/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
-    dynamodb_table = "myapp-prod-tflock"                 # <── replace
+    dynamodb_table = "myapp-prod-tflock" # <── replace
 
     # Optional: restrict access via IAM role assumed by Jenkins
     # role_arn = "arn:aws:iam::123456789012:role/TerraformRole"

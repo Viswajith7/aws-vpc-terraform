@@ -23,13 +23,13 @@ locals {
 module "vpc" {
   source = "./modules/vpc"
 
-  project_name        = var.project_name
-  environment         = var.environment
-  vpc_cidr            = var.vpc_cidr
-  enable_dns_support  = true
+  project_name         = var.project_name
+  environment          = var.environment
+  vpc_cidr             = var.vpc_cidr
+  enable_dns_support   = true
   enable_dns_hostnames = true
-  enable_flow_logs    = var.enable_flow_logs
-  flow_logs_retention = var.flow_logs_retention_days
+  enable_flow_logs     = var.enable_flow_logs
+  flow_logs_retention  = var.flow_logs_retention_days
 }
 
 # ── Subnets ────────────────────────────────────
@@ -61,9 +61,9 @@ module "nat_gateway" {
 module "security_groups" {
   source = "./modules/security-groups"
 
-  vpc_id       = module.vpc.vpc_id
-  project_name = var.project_name
-  environment  = var.environment
-  vpc_cidr     = var.vpc_cidr
+  vpc_id            = module.vpc.vpc_id
+  project_name      = var.project_name
+  environment       = var.environment
+  vpc_cidr          = var.vpc_cidr
   allowed_ssh_cidrs = var.allowed_ssh_cidrs
 }

@@ -63,7 +63,7 @@ variable "db_subnet_cidrs" {
 variable "allowed_ssh_cidrs" {
   description = "CIDRs allowed to reach the bastion host on port 22"
   type        = list(string)
-  default     = []   # lock down to VPN CIDR in prod
+  default     = [] # lock down to VPN CIDR in prod
 }
 
 # ── Observability ──────────────────────────────
