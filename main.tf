@@ -50,13 +50,13 @@ module "subnets" {
 module "nat_gateway" {
   source = "./modules/nat-gateway"
 
-  project_name       = var.project_name
-  environment        = var.environment
-  public_subnet_ids  = module.subnets.public_subnet_ids
-  private_subnet_ids = module.subnets.private_subnet_ids
-  availability_zones = var.availability_zones
+  project_name            = var.project_name
+  environment             = var.environment
+  public_subnet_ids       = module.subnets.public_subnet_ids
+  private_subnet_ids      = module.subnets.private_subnet_ids
+  availability_zones      = var.availability_zones
+  private_route_table_ids = module.subnets.private_route_table_ids
 }
-
 # ── Security Groups ────────────────────────────
 module "security_groups" {
   source = "./modules/security-groups"
